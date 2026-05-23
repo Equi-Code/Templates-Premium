@@ -8,6 +8,7 @@ export function TemplateCard({ t, index, onDetails, }) {
     const [hov, setHov] = useState(false);
     const isDark = t.tags.includes("Dark");
     const { addToCart } = useCart();
+    
 
 
     return (
