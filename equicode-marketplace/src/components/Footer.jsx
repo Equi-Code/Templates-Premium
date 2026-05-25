@@ -44,7 +44,10 @@ export function Footer() {
 
     return (
         <footer style={{
-            padding: '56px 28px 32px',
+            padding:
+                window.innerWidth < 768
+                    ? '48px 20px 28px'
+                    : '56px 28px 32px',
             background: footBg,
             borderTop: `1px solid ${borderC}`,
             transition: 'background .35s',
@@ -52,12 +55,20 @@ export function Footer() {
             <div style={{ maxWidth: 1160, margin: '0 auto' }}>
 
                 {/* Grid */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1.6fr 1fr 1fr 1fr',
-                    gap: 48, marginBottom: 56,
-                }}>
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns:
+                            window.innerWidth < 900
+                                ? '1fr'
+                                : window.innerWidth < 1200
+                                    ? '1.2fr 1fr 1fr'
+                                    : '1.6fr 1fr 1fr 1fr',
 
+                        gap: window.innerWidth < 768 ? 36 : 48,
+                        marginBottom: 56,
+                    }}
+                >
                     {/* Brand */}
                     <div>
                         <div style={{
@@ -69,7 +80,10 @@ export function Footer() {
                             <span style={{ color: '#6c47ff' }}>Code</span>
                         </div>
                         <p style={{
-                            fontSize: '.84rem', color: textC,
+                            fontSize:
+                                window.innerWidth < 768
+                                    ? '.95rem'
+                                    : '.84rem', color: textC, padding: '4px 0',
                             lineHeight: 1.75, maxWidth: 260, marginBottom: 20,
                         }}>{t.footerDesc}</p>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -124,7 +138,17 @@ export function Footer() {
 
                 {/* Bottom bar */}
                 <div style={{
-                    display: 'flex', alignItems: 'center',
+                    display: 'flex',
+                    flexDirection:
+                        window.innerWidth < 768
+                            ? 'column'
+                            : 'row',
+
+                    alignItems:
+                        window.innerWidth < 768
+                            ? 'flex-start'
+                            : 'center',
+
                     justifyContent: 'space-between', flexWrap: 'wrap', gap: 12,
                     paddingTop: 24, borderTop: `1px solid ${borderC}`,
                 }}>

@@ -79,8 +79,8 @@ ${user?.email}
                     right: 0,
                     width:
                         window.innerWidth < 768
-                            ? '100%'
-                            : 380,
+                            ? '100vw'
+                            : 420,
                     maxWidth: "100%",
                     height: "100vh",
                     background: "#0b0b11",
@@ -93,7 +93,7 @@ ${user?.email}
                     zIndex: 1000,
                     padding:
                         window.innerWidth < 768
-                            ? 18
+                            ? '18px 16px 24px'
                             : 24,
                     display: "flex",
                     flexDirection: "column",
@@ -114,12 +114,12 @@ ${user?.email}
                     <button
                         onClick={onClose}
                         style={{
-                            width: "100%",
                             background: "transparent",
                             border: "none",
                             color: "#fff",
                             fontSize: 24,
                             cursor: "pointer",
+                            fontside: ".95rem",
                         }}
                     >
                         ✕
@@ -163,7 +163,17 @@ ${user?.email}
                                         display: "flex",
                                         justifyContent:
                                             "space-between",
-                                        alignItems: "center",
+                                        alignItems:
+                                            window.innerWidth < 480
+                                                ? "flex-start"
+                                                : "center",
+
+                                        flexDirection:
+                                            window.innerWidth < 480
+                                                ? "column"
+                                                : "row",
+
+                                        gap: 12,
                                     }}
                                 >
                                     <div>
@@ -191,13 +201,15 @@ ${user?.email}
                                             removeFromCart(item.id)
                                         }
                                         style={{
-                                            whidth: "100%",
+                                            width: "100%",
                                             border: "none",
                                             background: "#ff2b2b",
                                             color: "#fff",
                                             borderRadius: 10,
                                             padding: "8px 12px",
                                             cursor: "pointer",
+                                            minHeight: 52,
+                                            fontSize: ".95rem",
                                         }}
                                     >
                                         ✕
@@ -260,6 +272,7 @@ ${user?.email}
                                     setEmail(e.target.value)
                                 }
                                 style={{
+                                    fontSize: "16px",
                                     padding: 14,
                                     borderRadius: 12,
                                     border:
@@ -280,6 +293,7 @@ ${user?.email}
                                     )
                                 }
                                 style={{
+                                    fontSize: "16px",
                                     padding: 14,
                                     borderRadius: 12,
                                     border:
@@ -314,6 +328,8 @@ ${user?.email}
                                     color: "#fff",
                                     fontWeight: 700,
                                     cursor: "pointer",
+                                    minHeight: 52,
+                                    fontSize: ".95rem",
                                 }}
                             >
                                 {isRegister
@@ -334,6 +350,8 @@ ${user?.email}
                                     color: "#fff",
                                     fontWeight: 700,
                                     cursor: "pointer",
+                                    minHeight: 52,
+                                    fontSize: ".95rem",
                                 }}
                             >
                                 Continuar con Google
@@ -346,7 +364,7 @@ ${user?.email}
                                     )
                                 }
                                 style={{
-                                    whidth: "100%",
+                                    width: "100%",
                                     background:
                                         "transparent",
                                     border: "none",
