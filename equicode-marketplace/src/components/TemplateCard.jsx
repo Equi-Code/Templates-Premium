@@ -8,7 +8,7 @@ export function TemplateCard({ t, index, onDetails, }) {
     const [hov, setHov] = useState(false);
     const isDark = t.tags.includes("Dark");
     const { addToCart } = useCart();
-    
+
 
 
     return (
@@ -29,7 +29,8 @@ export function TemplateCard({ t, index, onDetails, }) {
         >
             {/* Preview */}
             <div style={{
-                height: 220, position: "relative", overflow: "hidden",
+                height: window.innerWidth < 768 ? 190 : 200,
+                position: "relative", overflow: "hidden",
                 background: t.bg, display: "flex", alignItems: "center", justifyContent: "center",
             }}>
                 {/* Browser chrome */}
@@ -85,7 +86,14 @@ export function TemplateCard({ t, index, onDetails, }) {
             </div>
 
             {/* Body */}
-            <div style={{ padding: "20px 22px 22px", flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{
+                padding: window.innerWidth < 768 ? '18px' : '20px 22px 22px',
+
+
+
+
+                flex: 1, display: "flex", flexDirection: "column", gap: 10
+            }}>
                 {/* Tags */}
                 <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
                     {t.tags.map(tag => (
@@ -129,12 +137,37 @@ export function TemplateCard({ t, index, onDetails, }) {
                 </div>
 
                 {/* Footer */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", paddingTop: 12 }}>
+                <div style={{
+                    display: "flex",
+                    flexDirection:
+                        window.innerWidth < 768
+                            ? "column"
+                            : "row",
+                    alignItems:
+                        window.innerWidth < 768
+                            ? "stretch"
+                            : "center",
+                    justifyContent: "space-between",
+                    gap: 14, marginTop: "auto", paddingTop: 12
+                }}>
                     <div>
                         <span style={{ fontFamily: "'Syne',sans-serif", fontSize: "1.1rem", fontWeight: 800, color: t.accent }}>${t.price} USD</span>
                         <span style={{ fontSize: ".68rem", color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.3)", marginLeft: 6, fontFamily: "'JetBrains Mono',monospace" }}>{t.pages} pages</span>
                     </div>
-                    <div style={{ display: "flex", gap: 7 }}>
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: 7,
+                            width:
+                                window.innerWidth < 768
+                                    ? "100%"
+                                    : "auto",
+                            flexDirection:
+                                window.innerWidth < 768
+                                    ? "column"
+                                    : "row",
+                        }}
+                    >
                         <a href={t.demoUrl} target="_blank" rel="noopener" style={{
                             padding: "7px 14px", borderRadius: 8,
                             border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
@@ -143,6 +176,10 @@ export function TemplateCard({ t, index, onDetails, }) {
                             textDecoration: "none", transition: "all .2s", fontFamily: "'DM Sans',sans-serif",
                         }}>Demo</a>
                         <button onClick={() => onDetails(t)} style={{
+                            width:
+                                window.innerWidth < 768
+                                    ? '100%'
+                                    : 'auto',
                             padding: "7px 14px", borderRadius: 8,
                             border: "1px solid rgba(108,71,255,0.3)",
                             background: "rgba(108,71,255,0.1)",
@@ -159,6 +196,10 @@ export function TemplateCard({ t, index, onDetails, }) {
                                 })
                             }
                             style={{
+                                width:
+                                    window.innerWidth < 768
+                                        ? '100%'
+                                        : 'auto',
                                 padding: "7px 14px",
                                 borderRadius: 8,
                                 border: "none",

@@ -41,7 +41,7 @@ export function Hero() {
             display: 'flex', alignItems: 'center',
             position: 'relative', overflow: 'hidden',
             background: isDark ? '#070709' : '#f0eeff',
-            padding: '100px 0 80px',
+            padding: window.innerWidth < 768 ? '120px 0 60px' : '100px 0 80px',
             transition: 'background .35s',
         }}>
 
@@ -75,7 +75,7 @@ export function Hero() {
             <AmbientBlob color="#f97316" bottom="-50px" left="-80px" size={350} />
 
             {/* Floating chips */}
-            {floatingChips.map(({ label, delay, ...pos }) => (
+            {window.innerWidth < 768 && floatingChips.map(({ label, delay, ...pos }) => (
                 <div key={label} style={{
                     position: 'absolute',
                     padding: '6px 14px', borderRadius: 100,
@@ -122,8 +122,9 @@ export function Hero() {
                 {/* Headline */}
                 <h1 style={{
                     fontFamily: "'Syne', sans-serif", fontWeight: 800,
-                    fontSize: 'clamp(3.5rem, 8vw, 7.5rem)',
-                    lineHeight: .95, letterSpacing: '-.05em',
+                    fontSize: window.innerWidth < 768 ? '3rem' : 'clamp(3.5rem, 8vw, 7.5rem)',
+                    lineHeight: window.innerWidth < 768 ? 1.2 : 0.95,
+                    letterSpacing: '-.05em',
                     marginBottom: 28, maxWidth: 900,
                     opacity: vis ? 1 : 0,
                     transform: vis ? 'none' : 'translateY(24px)',
@@ -154,17 +155,46 @@ export function Hero() {
 
                 {/* CTA buttons */}
                 <div style={{
-                    display: 'flex', gap: 14, flexWrap: 'wrap',
+                    display: 'flex',
+                    gap: 14,
+                    flexWrap: 'wrap',
+                    flexDirection:
+                        window.innerWidth < 768
+                            ? 'column'
+                            : 'row',
+                    alignItems:
+                        window.innerWidth < 768
+                            ? 'stretch'
+                            : 'center',
                     opacity: vis ? 1 : 0,
                     transform: vis ? 'none' : 'translateY(16px)',
                     transition: 'all 0.8s ease 0.4s',
                 }}>
-                    <a href="#templates" style={ctaStyles ? ctaStyles('solid') : {}}>{t?.exploreCTA}</a>
+                    <a
+                        href="#templates"
+                        style={{
+                            ...ctaStyles('solid'),
+                            width:
+                                window.innerWidth < 768
+                                    ? '100%'
+                                    : 'auto',
+                            textAlign: 'center',
+                        }}
+                    >{t?.exploreCTA}</a>
 
                     <a
                         href="https://wa.me/+5491139259252?text=Hola%20Ezequiel%2C%20quiero%20un%20proyecto%20custom%20%F0%9F%9A%80"
                         target="_blank" rel="noopener"
-                        style={ctaStyles ? ctaStyles('outline', isDark) : {}}
+                        style={{
+                            ...(ctaStyles
+                                ? ctaStyles('outline', isDark)
+                                : {}),
+                            width:
+                                window.innerWidth < 768
+                                    ? '100%'
+                                    : 'auto',
+                            textAlign: 'center',
+                        }}
                     >
                         {t?.customCTA}
                     </a>
@@ -172,7 +202,12 @@ export function Hero() {
 
                 {/* Stats */}
                 <div style={{
-                    display: 'flex', gap: 40, marginTop: 64,
+                    display: 'flex',
+                    gap: 24,
+                    justifyContent:
+                        window.innerWidth < 768
+                            ? 'space-between'
+                            : 'flex-start',
                     paddingTop: 40, borderTop: `1px solid ${borderCol}`,
                     flexWrap: 'wrap',
                     opacity: vis ? 1 : 0,

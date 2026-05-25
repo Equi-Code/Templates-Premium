@@ -76,7 +76,10 @@ export function Navbar() {
             <nav data-nav="true" style={{
                 position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '0 36px', height: 64,
+                padding:
+                    window.innerWidth < 768
+                        ? '0 18px'
+                        : '0 36px', height: 64,
                 background: navBg,
                 backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
                 borderBottom: `1px solid ${borderCol}`,
@@ -102,6 +105,10 @@ export function Navbar() {
 
                 {/* Desktop links */}
                 <ul className="nav-desktop-links" style={{
+                    display:
+                        window.innerWidth < 768
+                            ? 'none'
+                            : 'flex',
                     gap: 4, listStyle: 'none', margin: 0, padding: 0,
                 }}>
                     {navLinks.map(({ label, href }) => (
@@ -178,8 +185,14 @@ export function Navbar() {
                             src={user.user_metadata.avatar_url}
                             alt=""
                             style={{
-                                width: 34,
-                                height: 34,
+                                width:
+                                    window.innerWidth < 768
+                                        ? 28
+                                        : 34,
+                                height:
+                                    window.innerWidth < 768
+                                        ? 28
+                                        : 34,
                                 borderRadius: "50%",
                             }}
                         />
@@ -190,7 +203,9 @@ export function Navbar() {
                                 color: "rgba(255,255,255,0.7)",
                             }}
                         >
-                            {user.user_metadata.full_name}
+                            {window.innerWidth < 768
+                                ? user.user_metadata.full_name?.split(' ')[0]
+                                : user.user_metadata.full_name}
                         </span>
                     </div>
                 )}
@@ -315,12 +330,33 @@ export function Navbar() {
                         textDecoration: 'none',
                         fontFamily: "'DM Sans', sans-serif",
                     }}
-
-
                 >
                     WhatsApp →
                 </a>
             </div>
+
+            {window.innerWidth < 768 && cartItems.length > 0 && (
+                <button
+                    onClick={() => setCartOpen(true)}
+                    style={{
+                        position: 'fixed',
+                        bottom: 18,
+                        left: 18,
+                        right: 18,
+                        zIndex: 999,
+                        padding: '16px',
+                        borderRadius: 18,
+                        border: 'none',
+                        background: 'linear-gradient(135deg,#6c47ff,#4f2fd4)',
+                        color: '#fff',
+                        fontWeight: 700,
+                        fontSize: '.95rem',
+                        boxShadow: '0 10px 30px rgba(0,0,0,.35)',
+                    }}
+                >
+                    🛒 Ver carrito ({cartItems.length})
+                </button>
+            )}
         </>
 
 

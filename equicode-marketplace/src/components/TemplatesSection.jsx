@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useApp } from '../context/useApp'
 import { useInView } from "../hooks/useInView"
 import { TEMPLATES } from '../data/templates'
-import {TemplateCard} from './TemplateCard'
-import {DetailModal} from './DetailModal'
+import { TemplateCard } from './TemplateCard'
+import { DetailModal } from './DetailModal'
 
 export function TemplatesSection() {
     const { t, isDark } = useApp()
@@ -30,7 +30,10 @@ export function TemplatesSection() {
 
     return (
         <section id="templates" style={{
-            padding: '110px 0 120px',
+            padding:
+                window.innerWidth < 768
+                    ? '80px 0 90px'
+                    : '110px 0 120px',
             background: isDark ? '#070709' : '#f0eeff',
             position: 'relative',
             transition: 'background .35s',
@@ -39,7 +42,11 @@ export function TemplatesSection() {
 
                 {/* Header */}
                 <div ref={ref} style={{
-                    textAlign: 'center', marginBottom: 64,
+                    textAlign: 'center',
+                    marginBottom:
+                        window.innerWidth < 768
+                            ? 42
+                            : 64,
                     opacity: vis ? 1 : 0,
                     transform: vis ? 'none' : 'translateY(24px)',
                     transition: 'all 0.7s ease',
@@ -82,7 +89,16 @@ export function TemplatesSection() {
                     }}>{t.sectionSub}</p>
 
                     {/* Filter bar */}
-                    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <div style={{
+                        display: 'flex',
+                        gap: 8,
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        padding:
+                            window.innerWidth < 768
+                                ? '0 10px'
+                                : 0,
+                    }}>
                         {t.filters.map(f => (
                             <button key={f} onClick={() => setFilter(f)} style={{
                                 padding: '7px 20px', borderRadius: 100,
@@ -102,8 +118,14 @@ export function TemplatesSection() {
                 {/* Grid */}
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-                    gap: 22,
+                    gridTemplateColumns:
+                        window.innerWidth < 768
+                            ? '1fr'
+                            : 'repeat(auto-fill, minmax(340px, 1fr))',
+                    gap:
+                        window.innerWidth < 768
+                            ? 18
+                            : 22,
                 }}>
                     {filtered.map((tp, i) => (
                         <TemplateCard
